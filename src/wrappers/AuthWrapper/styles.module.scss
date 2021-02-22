@@ -1,0 +1,15 @@
+.pageWrapper {
+  height: 100vh;
+  display: flex;
+}
+.mainWrapper {
+  height: 100%;
+  flex: 1;
+}
+.pageContent {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+  background: #f7f7fa;
+  height: calc(100vh - 65px);
+}
