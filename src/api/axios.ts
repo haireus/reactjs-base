@@ -34,12 +34,12 @@ axiosInstance.interceptors.response.use(
       logout();
       return Promise.reject(error);
     }
-    return Axios.post(`${configs.API_DOMAIN}/v1/app/auth/request-access-token`, {
+    return Axios.post(`${configs.API_DOMAIN}/auth/request-access-token`, {
       refreshToken,
     })
       .then((res) => {
         if (res.status === 200) {
-          const data = res.data;
+          const data = res.data.data;
           Cookies.set('token', data.token);
           originalConfig.headers.Authorization = `Bearer ${data.token}`;
           return Axios(originalConfig);
