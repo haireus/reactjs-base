@@ -3,6 +3,7 @@ import { Pagination, Button, Row } from 'antd';
 import { useQuery } from 'react-query';
 import TaskList from './TaskList';
 import { getListTask } from 'api/task';
+import styles from './styles.module.scss';
 
 const pageSize = 10;
 
@@ -15,7 +16,7 @@ export default function Tasks() {
   const handlePageChange = (page: number) => setFilter((oldFilter) => ({ ...oldFilter, pageIndex: page }));
 
   return (
-    <div>
+    <div className={styles.container}>
       <Row justify="space-between">
         <h2>List of Task</h2>
         <Button onClick={() => refetch()}>Reload</Button>

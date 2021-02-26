@@ -24,14 +24,15 @@ const logout = () => {
 };
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => {
+  (error: any) => {
     const originalConfig = error.config;
     if (error.response.status !== 401) {
       return Promise.reject(error);
     }
     const refreshToken = Cookies.get('refreshToken');
     if (!refreshToken) {
-      return logout();
+      logout();
+      return Promise.reject(error);
     }
     return Axios.post(`${configs.API_DOMAIN}/v1/app/auth/request-access-token`, {
       refreshToken,
@@ -44,9 +45,13 @@ axiosInstance.interceptors.response.use(
           return Axios(originalConfig);
         } else {
           logout();
+          return Promise.reject(error);
         }
       })
-      .catch(logout);
+      .catch(() => {
+        logout();
+        return Promise.reject(error);
+      });
   }
 );
 
