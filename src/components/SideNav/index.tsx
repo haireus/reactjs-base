@@ -66,17 +66,12 @@ export default function SideNav() {
         [styles.sideNav]: true,
         [styles.sideNavCollapsed]: collapsed,
       })}
+      style={{ width: collapsed ? 80 : 250, transition: 'width 0.3s' }}
     >
       <Link className={styles.logo} to="/index">
         HOME
       </Link>
-      <Menu
-        selectedKeys={[selectedKey]}
-        defaultOpenKeys={[]}
-        mode="inline"
-        inlineCollapsed={collapsed}
-        style={{ width: collapsed ? 80 : 250, transition: 'width 0.3s' }}
-      >
+      <Menu selectedKeys={[selectedKey]} defaultOpenKeys={[]} mode="inline" inlineCollapsed={collapsed}>
         {routes.map((route) => {
           if (route.children) {
             return (
