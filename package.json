@@ -39,6 +39,17 @@
     "eject": "react-scripts eject",
     "tslint": "tslint -c ./tslint.json src/**/*.{ts,tsx}"
   },
+  "lint-staged": {
+    "*": [
+      "prettier --write ./src",
+      "git add ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -55,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "husky": "^4.3.8",
     "rename-cli": "^6.2.1",
     "rimraf": "^3.0.2",
     "tslint": "^6.1.3",
