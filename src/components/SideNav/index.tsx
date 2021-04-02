@@ -4,12 +4,12 @@ import { Menu } from 'antd';
 import classNames from 'classnames';
 import { HomeOutlined, TableOutlined, SettingOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-import { SideNavContext } from 'context/SideNavContext';
+import useToggleSideNav from 'hooks/useToggleSideNav';
 
 const { SubMenu } = Menu;
 
 export default function SideNav() {
-  const { collapsed } = useContext(SideNavContext);
+  const collapsed = useToggleSideNav();
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState('1');
 
