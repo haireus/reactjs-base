@@ -1,6 +1,11 @@
-import { useQuery } from 'react-query';
+import { useCallback } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
 
 export default function useToggleSideNav() {
-  const { data }: any = useQuery('showSideNav');
-  return data;
+  const queryClient = useQueryClient();
+  const { data: collapsed }: any = useQuery('showSideNav');
+  const toggleSideNav = useCallback(() => {
+    queryClient.setQueryData('showSideNav', (data) => !data);
+  }, [queryClient]);
+  return { collapsed, toggleSideNav };
 }

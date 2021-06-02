@@ -9,7 +9,7 @@ import useToggleSideNav from 'hooks/useToggleSideNav';
 const { SubMenu } = Menu;
 
 export default function SideNav() {
-  const collapsed = useToggleSideNav();
+  const { collapsed } = useToggleSideNav();
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState('1');
 

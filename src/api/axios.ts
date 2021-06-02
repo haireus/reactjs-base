@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
       logout();
       return Promise.reject(error);
     }
-    return Axios.post(`${configs.API_DOMAIN}/auth/request-access-token`, {
+    return Axios.post(`${configs.API_DOMAIN}/v1/app/auth/request-access-token`, {
       refreshToken,
     })
       .then((res) => {

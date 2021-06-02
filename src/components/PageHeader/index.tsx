@@ -4,17 +4,14 @@ import avatarImg from 'assets/images/avatar.svg';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Menu, Dropdown } from 'antd';
-import { useQueryClient } from 'react-query';
 import useProfile from 'hooks/useProfile';
+import useToggleSideNav from 'hooks/useToggleSideNav';
 
 export default function PageHeader() {
   const history = useHistory();
-  const queryClient = useQueryClient();
-  const profile = useProfile();
+  const { profile } = useProfile();
 
-  const toggleSideNav = () => {
-    queryClient.setQueryData('showSideNav', (value) => !value);
-  };
+  const { toggleSideNav } = useToggleSideNav();
 
   const handleLogout = () => {
     Cookies.remove('token');
