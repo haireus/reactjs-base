@@ -1,14 +1,14 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 import { Card, Input, Button, Form, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 export default function SignUp() {
-  const history = useHistory();
+  // const history = useHistory();
   const { t } = useTranslation();
 
-  const navigateToLogIn = () => history.push('/login');
+  const navigateToLogIn = () =>{}
 
   const handleSubmit = (payload: any) => null;
 
