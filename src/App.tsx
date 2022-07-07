@@ -1,12 +1,18 @@
-import React, { Suspense } from 'react';
-import { createBrowserHistory } from 'history';
-import RootWrapper from './wrappers/RootWrapper';
-import { Router } from 'react-router-dom';
-import { QueryClientProvider, QueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import configs from 'config';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom";
+import { createBrowserHistory } from "history";
+import AuthWrapper from "wrappers/AuthWrapper";
+import RootWrapper from "wrappers/RootWrapper";
 
 export const history = createBrowserHistory();
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,15 +22,15 @@ const queryClient = new QueryClient({
     },
   },
 });
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router history={history}>
-        <Suspense fallback={null}>
+      <HistoryRouter history={history}>
+        <React.Suspense fallback={null}>
           <RootWrapper />
-        </Suspense>
-      </Router>
-      {configs.APP_ENV !== 'prod' && <ReactQueryDevtools initialIsOpen={false} />}
+        </React.Suspense>
+      </HistoryRouter>
     </QueryClientProvider>
   );
 }

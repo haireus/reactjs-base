@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import classNames from 'classnames';
 import { HomeOutlined, TableOutlined, SettingOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-import useToggleSideNav from 'hooks/useToggleSideNav';
+import useToggleSideNav from 'utils/hooks/useToggleSideNav';
 
 const { SubMenu } = Menu;
 
@@ -73,6 +73,7 @@ export default function SideNav() {
       </Link>
       <Menu selectedKeys={[selectedKey]} defaultOpenKeys={[]} mode="inline" inlineCollapsed={collapsed}>
         {routes.map((route) => {
+          console.log('routes', routes)
           if (route.children) {
             return (
               <SubMenu key={route.key} icon={route.icon} title={route.text}>

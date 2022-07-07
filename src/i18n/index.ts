@@ -1,5 +1,5 @@
-import configs from 'config';
 import { message } from 'antd';
+import configs from '../constants/config';
 
 export const handleErrorMessage = (error: any) => {
   message.destroy();

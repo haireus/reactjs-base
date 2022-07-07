@@ -1,29 +1,22 @@
 import React, { useContext } from 'react';
 import Cookies from 'js-cookie';
-import avatarImg from 'assets/images/avatar.svg';
-import { useHistory } from 'react-router-dom';
+// import avatarImg from 'assets/images/avatar.svg';
+import { useNavigate } from "react-router-dom";
 import styles from './styles.module.scss';
 import { Menu, Dropdown } from 'antd';
-import useProfile from 'hooks/useProfile';
-import useToggleSideNav from 'hooks/useToggleSideNav';
+import useToggleSideNav from 'utils/hooks/useToggleSideNav';
+import useProfile from 'utils/hooks/useProfile';
+import { logout } from 'utils/helper/authentication';
 
 export default function PageHeader() {
-  const history = useHistory();
   const { profile } = useProfile();
-
   const { toggleSideNav } = useToggleSideNav();
-
-  const handleLogout = () => {
-    Cookies.remove('token');
-    Cookies.remove('refreshToken');
-    history.push('/login');
-  };
 
   const menu = (
     <Menu style={{ minWidth: 200 }}>
       <Menu.Item key="1">Profile</Menu.Item>
       <Menu.Item key="2">Change Password</Menu.Item>
-      <Menu.Item key="3" onClick={handleLogout}>
+      <Menu.Item key="3" onClick={logout}>
         Logout
       </Menu.Item>
     </Menu>
@@ -38,9 +31,9 @@ export default function PageHeader() {
         <div className={styles.menuItem}>
           <Dropdown overlay={menu} trigger={['click']}>
             <div>
-              <span>{`Hi ${profile?.fullName || profile?.username}!`}</span>
+              <span>{`Hi ${profile?.fullName || profile?.name}!`}</span>
               &nbsp;
-              <img className={styles.icon} src={avatarImg} alt="" />
+              {/* <img className={styles.icon} src={avatarImg} alt="" /> */}
             </div>
           </Dropdown>
         </div>
