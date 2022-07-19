@@ -1,3 +1,4 @@
+import Tasks from "pages/Tasks";
 import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthWrapper from "wrappers/AuthWrapper";
@@ -11,7 +12,9 @@ export default function AppWrapper() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/" element={<AuthWrapper />} />
+        <Route path="/" element={<AuthWrapper />}>
+          <Route path="/tasks" element={<Tasks />} />
+        </Route>
       </Routes>
     </div>
   );
