@@ -1,18 +1,17 @@
-import React, { lazy, Suspense } from 'react';
-import Cookies from 'js-cookie';
-import PageHeader from 'components/PageHeader';
-import SideNav from 'components/SideNav';
+import React from "react";
+import Cookies from "js-cookie";
+import PageHeader from "components/PageHeader";
+import SideNav from "components/SideNav";
 // import { Redirect } from 'react-router-dom';
-import styles from './styles.module.scss';
-import { useQuery } from 'react-query';
-import { getProfile } from 'api/profile';
-import useProfile from 'utils/hooks/useProfile';
-import { Navigate } from 'react-router-dom';
+import styles from "./styles.module.scss";
+import useProfile from "utils/hooks/useProfile";
+import { Navigate, useOutlet } from "react-router-dom";
 
 // const Tasks = lazy(() => import('pages/Tasks'));
 
 export default function PageWrapper() {
-  const isAuthenticated = !!Cookies.get('token');
+  const outlet = useOutlet();
+  const isAuthenticated = !!Cookies.get("token");
   const { profile } = useProfile(isAuthenticated);
 
   if (!isAuthenticated) return <Navigate to="/login" />;
@@ -22,13 +21,7 @@ export default function PageWrapper() {
       <SideNav />
       <div className={styles.mainWrapper}>
         <PageHeader />
-        <div className={styles.pageContent}>
-          <Suspense fallback={null}>
-            {/* <Switch>
-              <Route path="/tasks" component={Tasks} />
-            </Switch> */}
-          </Suspense>
-        </div>
+        <div className={styles.pageContent}>{outlet}</div>
       </div>
     </div>
   );
