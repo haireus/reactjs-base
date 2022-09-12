@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu } from "antd";
-import classNames from "classnames";
 import {
   HomeOutlined,
-  TableOutlined,
   SettingOutlined,
+  TableOutlined,
 } from "@ant-design/icons";
-import styles from "./styles.module.scss";
+import { Menu } from "antd";
+import classNames from "classnames";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import useToggleSideNav from "utils/hooks/useToggleSideNav";
+import styles from "./styles.module.scss";
 
 const { SubMenu } = Menu;
 

@@ -1,5 +1,5 @@
 import React from "react";
-// import { Redirect, useHistory } from 'react-router-dom';
+
 import Cookies from "js-cookie";
 import _ from "lodash";
 import styles from "./style.module.scss";
@@ -7,11 +7,8 @@ import { Card, Input, Button, Form, Row, Checkbox } from "antd";
 import { useTranslation } from "react-i18next";
 import { login } from "utils/helper/authentication";
 import { Navigate } from "react-router-dom";
-// import { login } from 'api/authentication';
-// import { handleErrorMessage } from 'helper';
 
 export default function Login() {
-  // const history = useHistory();
   const { t } = useTranslation();
 
   const navigateToSignUp = () => {};
@@ -19,7 +16,7 @@ export default function Login() {
     login(payload);
   };
 
-  const isAuthenticated = !!Cookies.get('token');
+  const isAuthenticated = !!Cookies.get("token");
   if (isAuthenticated) return <Navigate to="/" />;
 
   return (
