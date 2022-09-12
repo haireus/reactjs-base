@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table, Button } from 'antd';
+import React from "react";
+import { Table, Button } from "antd";
 
 interface IProps {
   tasks: any;
@@ -9,19 +9,19 @@ interface IProps {
 const TaskList = ({ tasks, loading }: IProps) => {
   const columns = [
     {
-      title: 'Title',
-      dataIndex: 'title',
+      title: "Title",
+      dataIndex: "name",
     },
     {
-      title: 'Content',
-      dataIndex: 'content',
+      title: "Start date",
+      dataIndex: "startDate",
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
+      title: "Status",
+      dataIndex: "status",
     },
     {
-      title: 'Actions',
+      title: "Actions",
       render: (text: any, record: any) => {
         return (
           <>
@@ -33,7 +33,15 @@ const TaskList = ({ tasks, loading }: IProps) => {
       },
     },
   ];
-  return <Table rowKey="id" dataSource={tasks || []} columns={columns} pagination={false} loading={loading} />;
+  return (
+    <Table
+      rowKey="id"
+      dataSource={tasks || []}
+      columns={columns}
+      pagination={false}
+      loading={loading}
+    />
+  );
 };
 
 export default TaskList;

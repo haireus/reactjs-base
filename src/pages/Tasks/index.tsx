@@ -8,22 +8,21 @@ import styles from "./styles.module.scss";
 const pageSize = 10;
 
 export default function Tasks() {
-  // const [filter, setFilter] = useState({ pageIndex: 1, pageSize });
+  const [filter, setFilter] = useState({ pageIndex: 1, pageSize });
 
-  // const { data, isFetching, refetch } = useQuery(
-  //   ["tasks", filter],
-  //   () => getListTask(filter),
-  //   {
-  //     keepPreviousData: true,
-  //   }
-  // );
-  // const handlePageChange = (page: number) =>
-  //   setFilter((oldFilter) => ({ ...oldFilter, pageIndex: page }));
+  const { data, isFetching, refetch } = useQuery(
+    ["tasks", filter],
+    () => getListTask(filter),
+    {
+      keepPreviousData: true,
+    }
+  );
+  const handlePageChange = (page: number) =>
+    setFilter((oldFilter) => ({ ...oldFilter, pageIndex: page }));
 
   return (
     <div className={styles.container}>
-      Haireus
-      {/* <Row justify="space-between">
+      <Row justify="space-between">
         <h2>List of Task</h2>
         <Button onClick={() => refetch()}>Reload</Button>
       </Row>
@@ -35,7 +34,7 @@ export default function Tasks() {
         pageSize={pageSize}
         onChange={handlePageChange}
         showSizeChanger={false}
-      /> */}
+      />
     </div>
   );
 }

@@ -1,19 +1,37 @@
 import React from "react";
-
+import { useMutation } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import _ from "lodash";
 import styles from "./style.module.scss";
 import { Card, Input, Button, Form, Row, Checkbox } from "antd";
 import { useTranslation } from "react-i18next";
 import { login } from "utils/helper/authentication";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { handleErrorMessage } from "i18n";
+import { signin } from "api/authentication";
 
 export default function Login() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const navigateToSignUp = () => {};
+
+  const mutation = useMutation(
+    ({ email, password }: any) => signin({ email, password }),
+    {
+      onSuccess: (data) => {
+        const { token, refreshToken } = data.data;
+        Cookies.set("token", token);
+        Cookies.set("refreshToken", refreshToken);
+        navigate("/");
+      },
+      onError: (error) => {
+        handleErrorMessage(error);
+      },
+    }
+  );
   const handleSubmit = async (payload: any) => {
-    login(payload);
+    mutation.mutate(payload);
   };
 
   const isAuthenticated = !!Cookies.get("token");
@@ -57,7 +75,12 @@ export default function Login() {
             <Checkbox> {t("common.rememberMe")}</Checkbox>
           </Form.Item>
           <Form.Item labelCol={{ span: 24 }}>
-            <Button block type="primary" htmlType="submit">
+            <Button
+              block
+              type="primary"
+              htmlType="submit"
+              loading={mutation.isLoading}
+            >
               {t("common.login").toUpperCase()}
             </Button>
           </Form.Item>
