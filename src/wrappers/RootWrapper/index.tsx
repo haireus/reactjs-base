@@ -5,6 +5,7 @@ import AuthWrapper from "wrappers/AuthWrapper";
 
 const Login = lazy(() => import("pages/Login"));
 const SignUp = lazy(() => import("pages/SignUp"));
+const NotFound = lazy(() => import("pages/NotFound"));
 
 export default function AppWrapper() {
   return (
@@ -12,9 +13,12 @@ export default function AppWrapper() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
+
         <Route path="/" element={<AuthWrapper />}>
           <Route path="/tasks" element={<Tasks />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
