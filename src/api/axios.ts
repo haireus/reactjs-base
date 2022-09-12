@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import configs from "constants/config";
 import Cookies from "js-cookie";
 import { logout } from "utils/helper/authentication";
@@ -9,22 +9,23 @@ const axiosInstance = Axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config: any) => {
-    // eslint-disable-next-line no-param-reassign
+  (config: AxiosRequestConfig) => {
     const token = Cookies.get("token");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+      };
     }
     return config;
   },
-  (error: any) => Promise.reject(error)
+  (error: AxiosError) => Promise.reject(error)
 );
 
 axiosInstance.interceptors.response.use(
-  (response: any) => response,
-  (error: any) => {
+  (response: AxiosResponse) => response,
+  (error: AxiosError) => {
     const originalConfig = error.config;
-    if (error.response.status !== 401) {
+    if (error?.response?.status !== 401) {
       return Promise.reject(error);
     }
     const refreshToken = Cookies.get("refreshToken");
@@ -42,7 +43,7 @@ axiosInstance.interceptors.response.use(
         if (res.status === 200) {
           const data = res.data.data;
           Cookies.set("token", data.token);
-          originalConfig.headers.Authorization = `Bearer ${data.token}`;
+          originalConfig.headers = { Authorization: `Bearer ${data.token}` };
           return Axios(originalConfig);
         } else {
           logout();
