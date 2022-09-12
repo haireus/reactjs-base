@@ -1,14 +1,8 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  unstable_HistoryRouter as HistoryRouter,
-} from "react-router-dom";
 import { createBrowserHistory } from "history";
-import AuthWrapper from "wrappers/AuthWrapper";
+import * as React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+
 import RootWrapper from "wrappers/RootWrapper";
 
 export const history = createBrowserHistory();

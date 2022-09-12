@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import 'antd/dist/antd.css';
-import 'assets/index.global.scss';
-import 'i18n/i18n';
+import "antd/dist/antd.css";
+import "styles/_index.scss";
+import "i18n/i18n";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
